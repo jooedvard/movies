@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Movie from "./Movie";
 
-const KEY = process.env.API_KEY;
+const KEY ='f552c2245a9b47d89ec479248020';
 const API = "https://api.themoviedb.org/3/movie/popular?api_key=" + KEY;
 
 type Movie = {
