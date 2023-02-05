@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Movie from "./Movie";
 
-const KEY ='4361f552c2245a9b47d89ec479248020';
+const KEY = "4361f552c2245a9b47d89ec479248020";
 const API = "https://api.themoviedb.org/3/movie/popular?api_key=" + KEY;
 
 type Movie = {
-  id: number;
+  id: string;
   title: string;
   poster_path: string;
   overview: string;
@@ -15,12 +15,13 @@ type Movie = {
   vote_count: 228;
 };
 
-async function fetchMovies() {
+export async function fetchMovies() {
   const request = await fetch(API, { next: { revalidate: 100 } });
   const movies = await request.json();
-  console.log(movies)
+  console.log(movies);
   return movies.results;
 }
+
 
 export default async function Movies() {
   const movies = await fetchMovies();

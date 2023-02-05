@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { fetchMovies } from "../page";
 
-function getImagePath(image: string) {
+function getImagePath(image: any) {
   return "https://image.tmdb.org/t/p/original/" + image;
 }
 
-async function fetchMovie(id: string) {
+async function fetchMovie(id: any) {
   const KEY = "4361f552c2245a9b47d89ec479248020";
   const API = "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + KEY;
   const request = await fetch(API);
@@ -18,7 +19,6 @@ export default async function MoviePage({ params }: any) {
   const { movieID } = params;
   const movie = await fetchMovie(movieID);
 
-  console.log(movie);
   return (
     <div className="grid grid-rows-auto-1-auto">
       <h1 className="text-white text-xl m-5">{movie.title}</h1>
@@ -95,4 +95,14 @@ export default async function MoviePage({ params }: any) {
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const movies = await fetchMovies();
+  console.log(movies)
+  return movies.map((movie: any) => (
+    {
+    movieID: movie.id.toString(),
+  }));
+  
 }
