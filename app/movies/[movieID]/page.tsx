@@ -6,7 +6,7 @@ function getImagePath(image: string) {
 }
 
 async function fetchMovie(id: string) {
-  const KEY = "f552c2245a9b47d89ec479248020";
+  const KEY = "4361f552c2245a9b47d89ec479248020";
   const API = "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + KEY;
   const request = await fetch(API, { next: { revalidate: 100 } });
   const data = await request.json();

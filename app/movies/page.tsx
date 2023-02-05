@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Movie from "./Movie";
 
-const KEY ='f552c2245a9b47d89ec479248020';
+const KEY ='4361f552c2245a9b47d89ec479248020';
 const API = "https://api.themoviedb.org/3/movie/popular?api_key=" + KEY;
 
 type Movie = {
@@ -18,6 +18,7 @@ type Movie = {
 async function fetchMovies() {
   const request = await fetch(API, { next: { revalidate: 100 } });
   const movies = await request.json();
+  console.log(movies)
   return movies.results;
 }
 
